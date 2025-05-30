@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    install_password: '%env(INSTALL_PASSWORD)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,3 +22,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\State\ApiUserPasswordHasher:
+        bind:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'
+    acme_api.event.jwt_created_listener:
+        class: App\EventSubscriber\JWTSubscriber
+        #arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onJWTAuthenticated    }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_encoded, method: onJwtEncoded }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }

@@ -1,0 +1,62 @@
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    container_name: ketmie-svg-api-db
+    image: mysql:8.4
+    ports:
+      - 8090:3306
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=ketmie-api
+      - MYSQL_USER=ketmieapi
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./docker/_mysql:/var/lib/mysql:rw
+    networks:
+      - ketmie-svg-api-network
+  test-database:
+    container_name: ketmie-svg-api-test-db
+    image: mysql:8.4
+    ports:
+      - 8091:3306
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=ketmie-api
+      - MYSQL_USER=ketmieapi
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./docker/_mysql-test:/var/lib/mysql:rw
+    networks:
+      - ketmie-svg-api-network
+  pma:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - 8092:80
+    networks:
+      - ketmie-svg-api-network
+  pma-test:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - test-database
+    environment:
+      PMA_HOST: test-database
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - 8093:80
+    networks:
+      - ketmie-svg-api-network
+networks:
+  ketmie-svg-api-network:
+    driver: bridge

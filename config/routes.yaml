@@ -3,3 +3,9 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+auth:
+    path: /auth
+    methods: ['POST']
+setup:
+    path: /setup
+    methods: ['POST']

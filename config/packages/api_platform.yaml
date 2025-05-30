@@ -1,0 +1,18 @@
+api_platform:
+    title: Ketmie svg API
+    version: 1.0.0
+    use_symfony_listeners: true
+    formats:
+        json: [ "application/json" ]
+    patch_formats:
+        json: [ "application/json" ]
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
+    defaults:
+        stateless: true
+        pagination_enabled: false
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
