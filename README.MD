@@ -4,7 +4,6 @@
 ```shell
 #serve env=test
 export APP_ENV=test export APP_RUNTIME_ENV=test; symfony serve
-
 ```
 ## Symfony Memo
 Create entity using Symfony MakerBundle:
