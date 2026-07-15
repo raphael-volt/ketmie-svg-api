@@ -1,4 +1,4 @@
-# Ketmie SVG API
+# Ketmie SVG API v1.0.1
 
 ## Start server in test environment
 ```shell
