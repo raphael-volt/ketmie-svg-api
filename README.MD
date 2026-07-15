@@ -1,17 +1,12 @@
 # Ketmie SVG API
 
-## TEMP
+## Start server in test environment
 ```shell
 #serve env=test
 export APP_ENV=test export APP_RUNTIME_ENV=test; symfony serve
 
 ```
-{
-"email": "raphael@ketmie.com",
-"password": "password"
-}
-
-## Memo
+## Symfony Memo
 Create entity using Symfony MakerBundle:
 ```shell
 bin/console make:entity --api-resource
@@ -38,40 +33,7 @@ curl -X 'POST' \
 "password": "password",
 "secret":"INSTALL_PASSWORD"
 }'
-# test
-curl -X 'POST' \
-'https://127.0.0.1:8000/setup' \
--H 'accept: application/json' \
--H 'Content-Type: application/json' \
--d '{
-"email": "admin@test.com",
-"password": "password",
-"secret":"p@ssword"
-}'
-
-
-
-curl -X 'POST' \
-'https://api2.ketmie.com/setup' \
--H 'accept: application/json' \
--H 'Content-Type: application/json' \
--d '{
-"email": "stephanie@example.com",
-"password": "nelson2001",
-"secret":"cnobmyct0@INSTALL"
-}'
-
-
 ```
-# run configuration
-### @TODO
-- Why the setup endpoint is not available in swagger docs ?
-
-- create symbol groups
-
-## PROD MySQL  v8.4
-
-ketmieapi <PWD>KC
 
 ## MySQL CLI
 ```mysql -h localhost -P 8090 --protocol=tcp -u root -padmin ketmie-api```
